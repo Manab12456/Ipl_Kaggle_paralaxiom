@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from .models import matches, deliveries
 # Create your views here.
 
-class matches_played_per_year_List(APIView):
+class task_i(APIView):
     def get(self, request, *args, **kwargs):
         matches_data=matches.objects.all()
         temp_dict=dict()
@@ -15,13 +15,9 @@ class matches_played_per_year_List(APIView):
         temp_list=[]
         for key in temp_dict:   #list of dict
             temp_list=temp_list+[{key:temp_dict[key]}]
-        #convert python list of dict to json array of object
-        return Response(temp_list)
-
-
-class total_wins_per_team(APIView):
-    def get(self, request, *args, **kwargs):
-        matches_data=matches.objects.all()
+        #data I
+        
+        #data II-->
         temp_dict=dict()
         for data in matches_data:
             if data.winner:
@@ -32,7 +28,11 @@ class total_wins_per_team(APIView):
         result_list=[]    
         for key in temp_dict:   #list of dict
             result_list.append({key:temp_dict[key]})
-        return Response(result_list)
+        
+        result_list_ii=[]
+        result_list_ii.append(temp_list)
+        result_list_ii.append(result_list)
+        return Response(result_list_ii)
 
 
 class extra_runs_conceded_per_team_for_YEAR(APIView):
@@ -127,34 +127,3 @@ class played_vs_win(APIView):
 class top_economical_bowler(APIView):
     def get(self, request, *args, **kwargs):
         pass
-
-class task_i(APIView):
-    def get(self, request, *args, **kwargs):
-        matches_data=matches.objects.all()
-        temp_dict=dict()
-        for data in matches_data:
-            if data.season in temp_dict.keys():
-                temp_dict[data.season]=temp_dict[data.season]+1
-            else:
-                temp_dict[data.season]=1
-        temp_list=[]
-        for key in temp_dict:   #list of dict
-            temp_list=temp_list+[{key:temp_dict[key]}]
-        #data I
-        
-        #data II-->
-        temp_dict=dict()
-        for data in matches_data:
-            if data.winner:
-                if data.winner not in temp_dict.keys():
-                    temp_dict[data.winner]=1
-                else:
-                    temp_dict[data.winner]=temp_dict[data.winner]+1
-        result_list=[]    
-        for key in temp_dict:   #list of dict
-            result_list.append({key:temp_dict[key]})
-        
-        result_list_ii=[]
-        result_list_ii.append(temp_list)
-        result_list_ii.append(result_list)
-        return Response(result_list_ii)

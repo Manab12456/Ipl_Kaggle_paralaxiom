@@ -1,0 +1,10 @@
+.graphs-page {
+  width: 70%;
+  margin: 2% 15% 0 32%;
+}
+h2 {
+  text-align: center;
+  margin-left: -49%;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}

@@ -1,3 +1,4 @@
+from re import S
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import matches, deliveries
@@ -180,4 +181,58 @@ class played_vs_win(APIView):
 
 class top_economical_bowler(APIView):
     def get(self, request, *args, **kwargs):
-        pass
+        matches_data = matches.objects.all()
+        year_list = []
+        # getting list of years
+        for data in matches_data:
+            if data.season not in year_list:
+                year_list.append(data.season)
+        #
+        result_list = []
+        count = 0
+        for year in year_list:
+            # generating match ids for the YEAR
+            matches_id_list = []
+            matches_data_per_year = matches.objects.filter(season=year)
+            for data in matches_data_per_year:
+                if data.id not in matches_id_list:
+                    matches_id_list.append(data.id)
+            #
+
+            temp_dict = dict()
+            result_dict_ii = dict()
+            # getting extra runs for match_id =id
+            for ids in matches_id_list:
+                result_dict = dict()
+                deliveries_data_per_id = deliveries.objects.filter(
+                    match_id_id=ids)  # list of data with id=ids
+                for data in deliveries_data_per_id:
+                    if data.bowler not in temp_dict.keys():
+                        if data.ball == 1:
+                            over_ = 1
+                        else:
+                            over_ = 0
+                        temp_dict[data.bowler] = [
+                            over_, data.total_runs]  # check please
+                    else:
+                        over_vs_run = list(temp_dict[data.bowler])
+                        if data.ball == 1:
+                            over_ = 1
+                        else:
+                            over_ = 0
+
+                        over_vs_run[0] = over_vs_run[0]+over_
+                        over_vs_run[1] = over_vs_run[1]+data.total_runs
+                        temp_dict[data.bowler] = over_vs_run
+
+            for key in temp_dict:
+                result_dict[key] = temp_dict[key][1]/temp_dict[key][0]
+                # take care of 0 values::
+            max_eco_key = min(result_dict, key=result_dict.get)
+            result_dict_ii[max_eco_key] = result_dict[key]
+
+            for key in result_dict_ii:  # list of dict
+                count = count+1
+                result_list.append(
+                    {'id': count, 'year': year, 'bowler': key, 'rate:_run_vs_over': result_dict[key]})
+        return Response(result_list)

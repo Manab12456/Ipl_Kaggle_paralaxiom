@@ -1,13 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./style.css";
+import Nav from "./nav";
 // import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import FetchApi from "./FetchApi";
 
 ReactDOM.render(
   <React.StrictMode>
-    <FetchApi />
+    <Nav />
   </React.StrictMode>,
   document.getElementById("root")
 );

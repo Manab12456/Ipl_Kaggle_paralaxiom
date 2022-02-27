@@ -8,3 +8,27 @@ h2 {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
+
+.flex {
+  /* background-color: red; */
+  display: flex;
+  margin-left: -30%;
+}
+.flex > div {
+  /* background-color: #f1f1f1; */
+  margin: 10px;
+  padding: 20px;
+  font-size: 30px;
+}
+
+h5 {
+  margin-left: 50%;
+}
+
+#pg1,
+#pg2,
+#pg3,
+#pg4 {
+  margin: 30px;
+  padding: 10px;
+}

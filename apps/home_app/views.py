@@ -233,6 +233,9 @@ class top_economical_bowler(APIView):
 
             for key in result_dict_ii:  # list of dict
                 count = count+1
+                new_key = str(key)+' ' + str(year)
+                # result_list.append(
+                #     {'id': count, 'year': year, 'bowler': key, 'rate_run_vs_over': result_dict[key]})
                 result_list.append(
-                    {'id': count, 'year': year, 'bowler': key, 'rate:_run_vs_over': result_dict[key]})
+                    {'id': count, 'bowler': new_key, 'rate_run_vs_over': result_dict[key]})
         return Response(result_list)

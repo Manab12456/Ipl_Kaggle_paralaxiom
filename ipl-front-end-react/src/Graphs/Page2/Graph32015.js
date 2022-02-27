@@ -5,23 +5,28 @@ class Graph extends Component {
   constructor(iplData) {
     super(iplData);
     console.log(iplData.props);
-    const iplTeam = iplData.props.map((item) => item.team);
-    const iplWin = iplData.props.map((item) => item.total_win);
-    console.log("ipl year", iplTeam);
-    console.log("ipl Match", iplWin);
+    // const iplYear = iplData.props.map((item) => item.year == 2015);
+    let iplExtRun = iplData.props.filter((item) => item.year == "2015");
+    iplExtRun = iplExtRun.map((item) => item.extra_run);
+    let iplTeams = iplData.props.filter((item) => item.year == "2015");
+    iplTeams = iplTeams.map((item) => item.team);
+    // console.log("ipl year", iplYear);
+    console.log("ipl Extra Run", iplExtRun);
+    console.log("ipl Teams", iplTeams);
+
     this.state = {
       options: {
         chart: {
           id: "basic-bar",
         },
         xaxis: {
-          categories: iplTeam,
+          categories: iplTeams,
         },
       },
       series: [
         {
-          name: "Matches ",
-          data: iplWin,
+          name: "Ext Run",
+          data: iplExtRun,
         },
       ],
     };

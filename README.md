@@ -1,5 +1,5 @@
-# Ipl_data_react
-# Still under construction.
+# Django Rest Api and React-ApexChart for Ipl data.
+# Under construction....
   ###### step 1: Migrate the tables into the (mysql)database:
       python -3 manage.py makemigrations
       python -3 manage.py migrate

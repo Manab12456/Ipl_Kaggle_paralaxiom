@@ -45,7 +45,7 @@ export default function Nav() {
     <div>
       <div className="graphs-page">
         <button id="pg1" onClick={viewPage1}>
-          Page 1
+          Home
         </button>
         <button id="pg2" onClick={viewPage2}>
           Page 2

@@ -5,10 +5,10 @@ class Graph extends Component {
   constructor(iplData) {
     super(iplData);
     console.log(iplData.props);
-    // const iplYear = iplData.props.map((item) => item.year == 2008);
-    let iplWin = iplData.props.filter((item) => item.year == "2008");
+    // const iplYear = iplData.props.map((item) => item.year == 2013);
+    let iplWin = iplData.props.filter((item) => item.year == "2013");
     iplWin = iplWin.map((item) => item.matches_win);
-    let iplTeams = iplData.props.filter((item) => item.year == "2008");
+    let iplTeams = iplData.props.filter((item) => item.year == "2013");
     iplTeams = iplTeams.map((item) => item.team);
     // console.log("ipl year", iplYear);
     console.log("ipl Extra Run", iplWin);
